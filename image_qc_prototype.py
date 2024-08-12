@@ -4,6 +4,38 @@ from bioio import BioImage
 
 from scipy.optimize import curve_fit
 
+import numpy as np
+
+
+def detect_odd_histogram_distribution(image, bins=256, percentile_threshold=99.99):
+
+    # Calculate the histogram of the image
+    hist, bin_edges = np.histogram(image, bins=bins, range=(np.min(image), np.max(image)))
+
+    # Calculate the cumulative histogram to find the percentile threshold bin
+    cumulative_hist = np.cumsum(hist)
+    total_pixels = cumulative_hist[-1]
+
+    # Find the bin that corresponds to the 95th percentile
+    threshold_index = np.searchsorted(cumulative_hist, percentile_threshold / 100 * total_pixels)
+
+    # Find the indices of the first non-zero bin
+    non_zero_bins = np.where(hist > 0)[0]
+    if len(non_zero_bins) == 0:
+        # If no non-zero bins are found, return zero for all metrics
+        return 0, 0
+
+    first_non_zero_bin = non_zero_bins[0]
+
+    # Count zero bins between the first non-zero bin and the threshold bin
+    zero_bins = np.sum(hist[first_non_zero_bin:threshold_index] == 0)
+
+    # Calculate the ratio of zero bins to the total number of bins in this range
+    total_bins_in_range = threshold_index - first_non_zero_bin
+    zero_bin_ratio = zero_bins / total_bins_in_range if total_bins_in_range > 0 else 0
+
+    return zero_bins, zero_bin_ratio
+
 
 def flat_plane(coords, p0, p1, p2):
     # Unpack the coordinates
@@ -96,7 +128,7 @@ def calculate_saturation_percentage(image):
     return saturation_percentage
 
 
-img = BioImage('./inputs/Experiment-09.czi', reader=bioio_bioformats.Reader)
+img = BioImage('./inputs/Experiment-09.ome.tiff', reader=bioio_bioformats.Reader)
 
 for c in range(img.dims.C):
     channel = img.get_image_data('CZYX', C=c)
@@ -106,5 +138,8 @@ for c in range(img.dims.C):
     print(f'Dynamic range of Channel {c} is {dr}')
     saturation_percentage = calculate_saturation_percentage(channel)
     print(f'Relative saturation of Channel {c} is {saturation_percentage}%')
-    background_3d, non_uniformity = estimate_background_flat_plane_deviation(channel)
-    print(f"Non-uniformity (Flat Plane Deviation) for Channel {c} is {non_uniformity}")
+    # background_3d, non_uniformity = estimate_background_flat_plane_deviation(channel)
+    # print(f"Non-uniformity (Flat Plane Deviation) for Channel {c} is {non_uniformity}")
+    zero_bins, zero_bin_ratio = detect_odd_histogram_distribution(channel)
+    print(f"Number of zero bins: {zero_bins}")
+    print(f"Ratio of zero bins: {zero_bin_ratio:.4f}")
