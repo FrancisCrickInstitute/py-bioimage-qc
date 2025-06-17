@@ -1,0 +1,5 @@
+bioio
+bioio-ome-tiff
+numpy
+scipy
+jupyter
