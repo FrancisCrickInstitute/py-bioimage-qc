@@ -15,6 +15,10 @@ This notebook provides a set of simple quality control analyses for microscopy i
 
 ⚠️ **WORK IN PROGRESS** The code is based on a prototype script.
 
+## Try It!
+
+You can run the notebook now on Binder by clicking [here](https://mybinder.org/v2/gh/FrancisCrickInstitute/py-bioimage-qc/main?urlpath=%2Fdoc%2Ftree%2Fimage_qc_prototype_notebook.ipynb).
+
 ## Acknowledgements & Contact
 
 This notebook was developed as part of the **py-bioimage-qc** project at the Crick Advanced Light Microscopy (_CALM_) department in the Francis Crick Institute.  
