@@ -1,4 +1,4 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FrancisCrickInstitute/py-bioimage-qc/main?urlpath=%2Fdoc%2Ftree%2Fimage_qc_prototype_notebook.ipynb) [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/) ![Commit activity](https://img.shields.io/github/commit-activity/y/FrancisCrickInstitute/py-bioimage-qc?style=plastic) ![GitHub](https://img.shields.io/github/license/FrancisCrickInstitute/py-bioimage-qc?color=green&style=plastic)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FrancisCrickInstitute/py-bioimage-qc/main?urlpath=%2Fdoc%2Ftree%2Fimage_qc_prototype_notebook.ipynb) [![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/release/python-3130/) ![Commit activity](https://img.shields.io/github/commit-activity/y/FrancisCrickInstitute/py-bioimage-qc?style=plastic) ![GitHub](https://img.shields.io/github/license/FrancisCrickInstitute/py-bioimage-qc?color=green&style=plastic)
 
 # BioQCPy
 
