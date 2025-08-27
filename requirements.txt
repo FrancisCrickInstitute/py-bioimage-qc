@@ -3,3 +3,4 @@ bioio-ome-tiff
 numpy
 scipy
 jupyter
+torch
